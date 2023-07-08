@@ -1,6 +1,6 @@
 <div align=center>
 
-# Untitled Project**
+# **Untitled Project**
 
 ### *Dev Team*
 
