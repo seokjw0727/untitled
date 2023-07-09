@@ -1,0 +1,22 @@
+{
+  "name": "all_of_us_are_dead",
+  "version": "1.0.0",
+  "description": "<div align=center>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seokjw0727/untitled.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seokjw0727/untitled/issues"
+  },
+  "homepage": "https://github.com/seokjw0727/untitled#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
