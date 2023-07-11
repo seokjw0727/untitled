@@ -1,0 +1,41 @@
+<!-- 중고등학교용 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지.우.학 :: 정보 입력</title>
+</head>
+
+<body style="background-color: rgb(39, 39, 39);">
+    <center>
+        <h1 style="color: rgb(230, 230, 230);">
+            지금 우리 학교는
+        </h1>
+    </center>
+    <hr style="color: #ffffff; width: 50%;">
+    <div>
+        <center>
+            <!-- enter키 클릭시.. -->
+            <input type="search" style="width: 17.5%; padding: 0.5%;" id="myInput">
+        </center>
+    </div>
+    
+    
+
+    <script>
+        
+        var input = document.getElementById("myInput");
+
+        input.addEventListener("keyup", function (event) {
+            //enter키 클릭시 작동하는 javascript.
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                console.log('hello world')
+            }
+        });
+    </script>
+</body>
+
+</html>
