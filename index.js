@@ -1,8 +1,16 @@
 const express = require('express');
 const app = express();
+const path = require('path');
+
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Route for the root URL
 app.get('/', (req, res) => {
-    res.send('Hello, World!');
-  });
-  app.listen(3000, () => {
-    console.log('3000 포트에서 호스팅을 시작합니다.');
-  });
+  res.sendFile(path.join(__dirname, 'informaion.html'));
+});
+
+// Start the server
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
