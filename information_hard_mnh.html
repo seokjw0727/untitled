@@ -1,0 +1,55 @@
+<!-- 중고등학교용 -->
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지우학 | 정보입력</title>
+</head>
+
+<body style="background-color: rgb(39, 39, 39);">
+    <center>
+        <h1 style="color: rgb(230, 230, 230);">
+            지금 우리 학교는
+        </h1>
+    </center>
+    <hr style="color: #ffffff; width: 50%;">
+    <div>
+        <center>
+            <!-- enter키 클릭시.. -->
+            <input type="search" style="width: 17.5%; padding: 0.5%;" id="myInput">
+
+            <!-- 학교 나오는거 이 div 안쪽에 나오도록.. <hr>부터 반복 -->
+            <div class="container" style="width: 15%; border: solid 1px white; margin-top: 0.3%;">
+                <hr>
+                <h4 style="color: white; margin: 0;" onclick="school()">
+                    대전동산고등학교
+                </h4>
+                <p style="margin: 0; color: rgb(162, 162, 162);">대전광역시 중구 문화로 183</p>
+                
+            </div>
+        </center>
+    </div>
+    
+    
+
+    <script>
+        
+        var input = document.getElementById("myInput");
+
+        input.addEventListener("keyup", function (event) {
+            //enter키 클릭시 작동하는 javascript.
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                console.log('hello world')
+            }
+        });
+
+        function school(){
+            console.log('다음페이지로')
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>지우학 | 학교 검색</title>
+</head>
+
+
+
+<body>
+  <form id="search-form">
+    <label for="search-input">학교 이름 : </label>
+    <input type="text" id="search-input" name="school_name" required>
+    <button type="submit">검색</button>
+  </form>
+
+  <div id="search-results">
+    <!-- 검색 결과 javescript -->
+  </div>
+  
+  <script>
+    document.getElementById('search-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const schoolName = document.getElementById('search-input').value;
+      
+
+
+      // NEIS API를 사용하여 학교를 검색합니다.
+      fetch(`https://open.neis.go.kr/hub/hisTimetable?ATPT_OFCDC_SC_CODE=G10&SD_SCHUL_CODE=7430049`)  // API 주소
+        .then(response => response.json())
+        .then(data => {
+          const resultsContainer = document.getElementById('search-results');
+          resultsContainer.innerHTML = ''; // 이전 검색 결과를 지웁니다.
+          
+          if (data.RESULT.CODE === 'INFO-000') {
+            const schools = data.schoolInfo;
+            
+            if (schools.length === 0) {
+              resultsContainer.innerHTML = '<p>학교를 찾을 수 없습니다.</p>';
+            } else {
+              const list = document.createElement('ul');
+              schools.forEach(school => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${school.SCHUL_NM} - ${school.ADDRESS}`;
+                list.appendChild(listItem);
+              });
+              resultsContainer.appendChild(list);
+            }
+          } else {
+            resultsContainer.innerHTML = '<p>데이터를 불러오는 과정에서 문제가 발생했습니다.</p>';
+          }
+        })
+        .catch(error => {
+          const resultsContainer = document.getElementById('search-results');
+          resultsContainer.innerHTML = `<p>에러: ${error.message}</p>`;
+        });
+    });
+  </script>
+
+</body>
+</html>
