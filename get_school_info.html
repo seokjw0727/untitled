@@ -26,35 +26,33 @@
       
 
 
-      // NEIS API를 사용하여 학교를 검색합니다.
-      fetch(`https://open.neis.go.kr/hub/hisTimetable?ATPT_OFCDC_SC_CODE=G10&SD_SCHUL_CODE=7430049`)  // API 주소
+      // NEIS API 를 사용하여 학교를 검색합니다.
+      var ATPT_OFCDC_SC_CODE = "G10";
+      var SD_SCHUL_CODE = "7430049";
+
+      fetch(`https://open.neis.go.kr/hub/hisTimetable?KEY=8cf6bd513d164d7483b9ef2c12d3d671&ATPT_OFCDC_SC_CODE=` + ATPT_OFCDC_SC_CODE + `& SD_SCHUL_CODE=` + SD_SCHUL_CODE, {headers: {'Accept':'application/json'}})
         .then(response => response.json())
         .then(data => {
           const resultsContainer = document.getElementById('search-results');
           resultsContainer.innerHTML = ''; // 이전 검색 결과를 지웁니다.
           
           if (data.RESULT.CODE === 'INFO-000') {
-            const schools = data.schoolInfo;
+            console.log(data.RESULT.SCHUL_NM)
+           
             
-            if (schools.length === 0) {
-              resultsContainer.innerHTML = '<p>학교를 찾을 수 없습니다.</p>';
-            } else {
-              const list = document.createElement('ul');
-              schools.forEach(school => {
-                const listItem = document.createElement('li');
-                listItem.textContent = `${school.SCHUL_NM} - ${school.ADDRESS}`;
-                list.appendChild(listItem);
-              });
-              resultsContainer.appendChild(list);
-            }
-          } else {
-            resultsContainer.innerHTML = '<p>데이터를 불러오는 과정에서 문제가 발생했습니다.</p>';
+            // const schools = data.schoolInfo;
+            // const list = document.createElement('ul');
+            // schools.forEach(school => {
+            //   const listItem = document.createElement('li');
+            //   listItem.textContent = `${school.SCHUL_NM} - ${schoolADDRESS}`;
+            //   list.appendChild(listItem);
+            // });
+            // resultsContainer.appendChild(list);
+          }
+          else {
+            resultsContainer.innerHTML = '데이터를 불러오는 도중 오류가 발생했습니다.';
           }
         })
-        .catch(error => {
-          const resultsContainer = document.getElementById('search-results');
-          resultsContainer.innerHTML = `<p>에러: ${error.message}</p>`;
-        });
     });
   </script>
 
