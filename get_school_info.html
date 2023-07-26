@@ -22,15 +22,14 @@
   <script>
     document.getElementById('search-form').addEventListener('submit', function (event) {
       event.preventDefault();
-      const schoolName = document.getElementById('search-input').value;
       
 
 
       // NEIS API 를 사용하여 학교를 검색합니다.
       var ATPT_OFCDC_SC_CODE = "G10";
       var SD_SCHUL_CODE = "7430049";
-
-      fetch(`https://open.neis.go.kr/hub/hisTimetable?KEY=8cf6bd513d164d7483b9ef2c12d3d671&ATPT_OFCDC_SC_CODE=` + ATPT_OFCDC_SC_CODE + `& SD_SCHUL_CODE=` + SD_SCHUL_CODE, {headers: {'Accept':'application/json'}})
+      https://open.neis.go.kr/hub/hisTimetable?KEY=8cf6bd513d164d7483b9ef2c12d3d671&ATPT_OFCDC_SC_CODE=G10&%20SD_SCHUL_CODE=7430049
+      fetch(`https://open.neis.go.kr/hub/hisTimetable?KEY=8cf6bd513d164d7483b9ef2c12d3d671&ATPT_OFCDC_SC_CODE=`+ATPT_OFCDC_SC_CODE+`&SD_SCHUL_CODE=`+SD_SCHUL_CODE, {headers: {'Accept':'application/json'}})
         .then(response => response.json())
         .then(data => {
           const resultsContainer = document.getElementById('search-results');
