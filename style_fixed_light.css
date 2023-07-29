@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2; /* Light 모드 배경색 */
+    color: #333; /* Light 모드 폰트색 */
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #e3e3e3; /* Light 모드 컨테이너 배경색 */
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.navbar {
+    background-color: #f9f9f9; /* Light 모드 네비게이션 바 배경색 */
+    padding: 10px 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #333; /* Light 모드 로고 폰트색 */
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.nav-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.menu .meal {
+    flex: 0 0 50%; /* 두 개의 식단을 수평으로 50%로 나눠서 배치 */
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #c9c9c9;
+    border-radius: 5px;
+    background-color: #c9c9c9;
+}
+
+.nav-menu li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.nav-menu li:first-child {
+    margin-left: 0;
+}
+
+.nav-menu li a {
+    color: #333; /* Light 모드 메뉴 폰트색 */
+    text-decoration: none;
+}
+
+.nav-menu li a:hover {
+    text-decoration: underline;
+}
+
+/* 나머지 CSS는 이전과 동일 */
+.google-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.google-button a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4285F4;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.google-button a:hover {
+    background-color: #3367D6;
+}
