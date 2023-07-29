@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+    color: #fff;
+}
+
+.container {
+    max-width: 50%;
+    margin: 0 auto;
+    padding: 1%;
+    background-color: #444;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.navbar {
+    background-color: #222;
+    padding: 10px 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #fff;
+    font-size: 150%;
+    text-decoration: none;
+}
+
+.nav-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.nav-menu li:first-child {
+    margin-left: 0;
+}
+
+.nav-menu li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-menu li a:hover {
+    text-decoration: underline;
+}
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.menu .meal {
+    flex: 0 0 50%; /* 두 개의 식단을 수평으로 50%로 나눠서 배치 */
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #555;
+}
+
+.google-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.google-button a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4285F4;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.google-button a:hover {
+    background-color: #3367D6;
+}
+
+/* 나머지 CSS는 이전과 동일 */
