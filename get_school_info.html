@@ -10,6 +10,30 @@
 
 <body>
   <form id="search-form">
+    <!-- 교육청 선택  -->
+    <label for="search-input">교육청을 선택하세요.</label>
+    <select id="input_region" name="region" class="required form-control" required="required">
+      <option selected="1">교육청 선택</option>
+      <option value="B10"> 서울특별시 </option>
+      <option value="C10"> 부산광역시 </option>
+      <option value="D10"> 대구광역시 </option>
+      <option value="E10"> 인천광역시 </option>
+      <option value="F10"> 광주광역시 </option>
+      <option value="G10"> 대전광역시 </option>
+      <option value="H10"> 울산광역시 </option>
+      <option value="I10"> 세종특별자치시 </option>
+      <option value="J10"> 경기도 </option>
+      <option value="K10"> 강원특별자치도 </option>
+      <option value="M10"> 충청북도 </option>
+      <option value="N10"> 충청남도 </option>
+      <option value="P10"> 전라북남도 </option>
+      <option value="Q10"> 전라남도 </option>
+      <option value="R10"> 경상북도 </option>
+      <option value="S10"> 경상남도 </option>
+      <option value="T10"> 제주특별자치도 </option>
+    </select>
+    
+    <!-- 학교 이름 입력 -->
     <label for="search-input">학교 이름 : </label>
     <input type="text" id="search-input" name="school_name" required>
     <button type="submit">검색</button>
@@ -22,37 +46,65 @@
   <script>
     document.getElementById('search-form').addEventListener('submit', function (event) {
       event.preventDefault();
-      
+
+      // 각종 변수들
+      const schoolName = document.getElementById('search-input').value;
+      const region = document.getElementById('input_region').value;
+      var ATPT_OFCDC_SC_CODE = region;
+      var SCHUL_NM = schoolName;
+      var API_key = '8cf6bd513d164d7483b9ef2c12d3d671';
 
 
-      // NEIS API 를 사용하여 학교를 검색합니다.
-      var ATPT_OFCDC_SC_CODE = "G10";
-      var SD_SCHUL_CODE = "7430049";
-      https://open.neis.go.kr/hub/hisTimetable?KEY=8cf6bd513d164d7483b9ef2c12d3d671&ATPT_OFCDC_SC_CODE=G10&%20SD_SCHUL_CODE=7430049
-      fetch(`https://open.neis.go.kr/hub/hisTimetable?KEY=8cf6bd513d164d7483b9ef2c12d3d671&ATPT_OFCDC_SC_CODE=`+ATPT_OFCDC_SC_CODE+`&SD_SCHUL_CODE=`+SD_SCHUL_CODE, {headers: {'Accept':'application/json'}})
-        .then(response => response.json())
-        .then(data => {
-          const resultsContainer = document.getElementById('search-results');
+
+      // 학교 기본 정보 API 호출
+      fetch(`https://open.neis.go.kr/hub/schoolInfo?KEY=`+API_key+`&ATPT_OFCDC_SC_CODE=`+ATPT_OFCDC_SC_CODE+`&SCHUL_NM=`+SCHUL_NM,
+      {headers: {'Accept':'application/json', 'Access-Control-Allow-Origin' : '*'},
+      method: 'GET',
+      credentials: 'include'}
+      )
+      .then(response => response.json())
+      .then(data => {
+
+        const resultsContainer = document.getElementById('search-results');
           resultsContainer.innerHTML = ''; // 이전 검색 결과를 지웁니다.
           
+          // 검색 결과가 존재하면, 검색 결과를 출력합니다.
           if (data.RESULT.CODE === 'INFO-000') {
-            console.log(data.RESULT.SCHUL_NM)
-           
-            
-            // const schools = data.schoolInfo;
-            // const list = document.createElement('ul');
-            // schools.forEach(school => {
-            //   const listItem = document.createElement('li');
-            //   listItem.textContent = `${school.SCHUL_NM} - ${schoolADDRESS}`;
-            //   list.appendChild(listItem);
-            // });
-            // resultsContainer.appendChild(list);
+            const schoolInfo = data.schoolInfo;
+            const schoolInfoElement = document.createElement('div');
+            schoolInfoElement.innerHTML = `
+              <h2>${schoolInfo.SCHUL_NM}</h2>
+              <p>학교코드 : ${schoolInfo.ORG_RDNMA}</p>
+              <p>학교종류 : ${schoolInfo.SCHUL_KND_SC_NM}</p>
+              <p>설립 : ${schoolInfo.FOND_SC_NM}</p>
+              <p>소재지 : ${schoolInfo.ORG_RDNMA}</p>
+              <p>전화번호 : ${schoolInfo.ORG_TELNO}</p>
+              <p>홈페이지 : ${schoolInfo.HMPG_ADRES}</p>
+            `;
+            resultsContainer.appendChild(schoolInfoElement);
           }
-          else {
-            resultsContainer.innerHTML = '데이터를 불러오는 도중 오류가 발생했습니다.';
+
+          // 검색 결과가 존재하지 않으면, 검색 결과가 없다는 메시지를 출력합니다.
+          else if (data.RESULT.CODE === 'INFO-200') {
+            const noResultsElement = document.createElement('div');
+            noResultsElement.innerText = '검색 결과가 없습니다.';
+            resultsContainer.appendChild(noResultsElement);
           }
-        })
-    });
+        });
+      });
+
+
+
+
+
+
+
+
+      // // 학교 시간표 API 호출
+      // fetch(`https://open.neis.go.kr/hub/hisTimetable?KEY=`+API_key+`&ATPT_OFCDC_SC_CODE=`+ATPT_OFCDC_SC_CODE+`&SCHUL_NM=`+SCHUL_NM, {headers: {'Accept':'application/json'}})
+      // .then(response => response.json())
+      // .then(data => {})
+
   </script>
 
 </body>
