@@ -57,19 +57,16 @@
 
 
       // 학교 기본 정보 API 호출
-      fetch(`https://open.neis.go.kr/hub/schoolInfo?KEY=`+API_key+`&ATPT_OFCDC_SC_CODE=`+ATPT_OFCDC_SC_CODE+`&SCHUL_NM=`+SCHUL_NM,
-      {headers: {'Accept':'application/json', 'Access-Control-Allow-Origin' : '*'},
-      method: 'GET',
-      credentials: 'include'}
-      )
-      .then(response => response.json())
+      fetch(`https://open.neis.go.kr/hub/schoolInfo?KEY=`+API_key+`&ATPT_OFCDC_SC_CODE=`+ATPT_OFCDC_SC_CODE+`&SCHUL_NM=`+SCHUL_NM+`&pIndex=1&pSize=100&Type=json`,
+      {headers: {'Accept':'application/json'}, 
+      mode: 'no-cors',})
       .then(data => {
 
         const resultsContainer = document.getElementById('search-results');
           resultsContainer.innerHTML = ''; // 이전 검색 결과를 지웁니다.
           
           // 검색 결과가 존재하면, 검색 결과를 출력합니다.
-          if (data.RESULT.CODE === 'INFO-000') {
+          if (data.RESULT?.CODE === 'INFO-000') {
             const schoolInfo = data.schoolInfo;
             const schoolInfoElement = document.createElement('div');
             schoolInfoElement.innerHTML = `
@@ -85,7 +82,7 @@
           }
 
           // 검색 결과가 존재하지 않으면, 검색 결과가 없다는 메시지를 출력합니다.
-          else if (data.RESULT.CODE === 'INFO-200') {
+          else if (data.RESULT?.CODE === 'INFO-200') {
             const noResultsElement = document.createElement('div');
             noResultsElement.innerText = '검색 결과가 없습니다.';
             resultsContainer.appendChild(noResultsElement);
